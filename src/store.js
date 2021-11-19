@@ -71,13 +71,15 @@ class Store {
    * @param code
    */
   selectItem(code) {
-    this.setState({
-      items: this.state.items.map(item => {
-        if (item.code === code){
-          item.selected = !item.selected;
-        }
-        return item;
-      })
+    const newItems = this.state.items.map(item => ({...item}));
+    const element = newItems.find(item => item.code === code);
+    if (element) {
+      element.selected = !element.selected;
+      element.value ++;
+    }
+    
+    this.setState( {
+     items: newItems
     });
   }
 }
