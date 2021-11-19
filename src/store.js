@@ -73,11 +73,13 @@ class Store {
   selectItem(code) {
     const newItems = this.state.items.map(item => ({...item}));
     const element = newItems.find(item => item.code === code);
+    newItems.forEach(e => { if (e !== element) { e.selected = false } });
     if (element) {
       element.selected = !element.selected;
-      element.value ++;
+      if (element.selected) {
+        element.value++;
+      }
     }
-    
     this.setState( {
      items: newItems
     });
