@@ -48,13 +48,23 @@ body {
 /* Пункт списка */
 .Item {
 	display: flex;
+	flex-shrink: 2;
 	justify-content: space-between;
-	align-items: center;
+	align-items: baseline;
 }
 .Item__title {
-	width: 200px;
+	width: 150px;
 	text-align: left;
 	padding: 20px 10px;
+}
+.Item__count {
+	display: flex;
+	border-left: 2px solid #353434;
+	height: 20px;
+	padding-left: 10px;
+}
+.Item__hidden {
+	visibility: hidden;
 }
 .Item__actions {
 	display: flex;
@@ -71,10 +81,3 @@ body {
 	background-color: #129469;
 	border: none;
 }
-/*
-.Line {
-	border-left: 2px solid #353434;
-	height: 20px;
-	padding-right: 10px;
-}
-*/
