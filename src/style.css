@@ -48,36 +48,24 @@ body {
 /* Пункт списка */
 .Item {
 	display: flex;
-	flex-shrink: 2;
-	justify-content: space-between;
+	justify-content: flex-start;
 	align-items: baseline;
+	padding: 20px;
 }
 .Item__title {
-	width: 150px;
-	text-align: left;
-	padding: 20px 10px;
+	width: 160px;
 }
 .Item__count {
 	display: flex;
-	border-left: 2px solid #353434;
-	height: 20px;
+	flex-grow: 2;
+	border-left: 1px solid #353434;
+	height: 15px;
 	padding-left: 10px;
 }
-.Item__hidden {
-	visibility: hidden;
-}
-.Item__actions {
-	display: flex;
-	align-items: flex-end;
-	padding: 20px 20px 20px 10px;
-}
+
+/* .Item__actions {
+} */
+
 .Item__number {
-	border: 1px solid #353434;
-	border-radius: 50%;
-	padding: 5px 10px;
-	margin-left: 20px;
-}
-.Item__number:hover {
-	background-color: #129469;
-	border: none;
+	padding-right: 10px;
 }
