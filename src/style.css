@@ -57,14 +57,16 @@ body {
 }
 .Item__count {
 	display: flex;
-	flex-grow: 2;
 	border-left: 1px solid #353434;
 	height: 15px;
 	padding-left: 10px;
 }
 
-/* .Item__actions {
-} */
+.Item__actions {
+	display: flex;
+	flex-grow: 1;
+	justify-content: flex-end;
+}
 
 .Item__number {
 	padding-right: 10px;
