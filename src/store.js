@@ -71,18 +71,33 @@ class Store {
    * @param code
    */
   selectItem(code) {
-    const newItems = this.state.items.map(item => ({...item}));
-    const element = newItems.find(item => item.code === code);
-    newItems.forEach(e => { if (e !== element) { e.selected = false } });
-    if (element) {
-      element.selected = !element.selected;
-      if (element.selected) {
-        element.value++;
-      }
-    }
-    this.setState( {
-     items: newItems
+    // const newItems = this.state.items.map(item => ({...item}));
+    // const element = newItems.find(item => item.code === code);
+    // newItems.forEach(e => { if (e !== element) { e.selected = false } });
+    // if (element) {
+    //   element.selected = !element.selected;
+    //   if (element.selected) {
+    //     element.value++;
+    //   }
+    // }
+    // this.setState( {
+    //  items: newItems
+    // });
+
+     this.setState( {
+     items: this.state.items.map(item => {
+       if (item.code === code) {
+         item.selected = !item.selected;
+         if (item.selected) {
+           item.value++;
+         }
+       } else {
+         item.selected = false;
+       }
+       return item;
+    })
     });
+
   }
 }
 
