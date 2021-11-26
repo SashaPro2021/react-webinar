@@ -84,21 +84,34 @@ class Store {
     //  items: newItems
     // });
 
-     this.setState( {
-     items: this.state.items.map(item => {
-       if (item.code === code) {
-         item.selected = !item.selected;
-         if (item.selected) {
-           item.value++;
-         }
-       } else {
-         item.selected = false;
-       }
-       return item;
-    })
-    });
+    // this.setState({
+    //   items: this.state.items.map(item => {
+    //     if (item.code === code) {
+    //       item.selected = !item.selected;
+    //       if (item.selected) {
+    //         item.value++;
+    //       }
+    //     } else {
+    //       item.selected = false;
+    //     }
+    //     return item;
+    //   })
+    // }
 
+    this.setState({
+      items: this.state.items.map(item => {
+        if (item.code === code) {
+          return {
+            ...item,
+            selected: !item.selected
+          };
+        }
+        return item;
+      })
+
+    });
   }
+  
 }
 
 export default Store;
