@@ -1,0 +1,21 @@
+.Total {
+	display: flex;
+}
+.Total__quontity {
+	padding-left: 15px;
+	padding-right: 15px;
+	font-weight: 700;
+	font-size: 18px;
+	line-height: 21px;
+
+	color: #000000;
+}
+span {
+	padding-right: 6px;
+	padding-left: 6px;
+}
+
+.Empty {
+	padding-left: 12px;
+	padding-right: 12px;
+}

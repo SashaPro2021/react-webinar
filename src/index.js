@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Store from './store.js';
-import App from './app.js';
+import App from './App/app';
 
 const root = document.getElementById("app");
 
@@ -10,14 +10,15 @@ console.log('index.js');
 // Состояние приложения
 const store = new Store({
   items: [
-    {code: 1, title: 'Название элемента', value: 0 },
-    {code: 2, title: 'Некий объект', value: 0 },
-    {code: 3, title: 'Заголовок', value: 0 },
-    {code: 4, title: 'Короткое название', value: 0 },
-    {code: 5, title: 'Запись', value: 0 },
-    {code: 6, title: 'Пример названия', value: 0 },
-    {code: 7, title: 'Седьмой', value: 0 }
-  ]
+    {code: 1, title: 'Название товара', price: 100 },
+    {code: 2, title: 'Книга про React', price: 770 },
+    {code: 3, title: 'Хлеб', price: 43 },
+    {code: 4, title: 'Трактор', price: 7654320 },
+    {code: 5, title: 'Телефон iPhone XIXV', price: 120000 },
+    {code: 6, title: 'Карандаши цветные', price: 111 },
+    {code: 7, title: 'Товар сюрприз', price: 0 }
+  ],
+  products:[ ]
 });
 
 // Сообщаем реакту что и куда рендерить.

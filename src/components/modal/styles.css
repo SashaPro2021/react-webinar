@@ -1,0 +1,20 @@
+.Modal__backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.7);
+}
+.Modal__content {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	min-height: 600px;
+	width: 960px;
+	background-color: #ffffff;
+	border-radius: 5px;
+	box-shadow: 0 0 15px 5px #0000003b;
+	box-sizing: border-box;
+}

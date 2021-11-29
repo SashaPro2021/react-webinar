@@ -66,52 +66,21 @@ class Store {
     });
   }
 
-  /**
-   * Выделение записи по её коду
-   * @param code
-   */
-  selectItem(code) {
-    // const newItems = this.state.items.map(item => ({...item}));
-    // const element = newItems.find(item => item.code === code);
-    // newItems.forEach(e => { if (e !== element) { e.selected = false } });
-    // if (element) {
-    //   element.selected = !element.selected;
-    //   if (element.selected) {
-    //     element.value++;
-    //   }
-    // }
-    // this.setState( {
-    //  items: newItems
-    // });
-
-    // this.setState({
-    //   items: this.state.items.map(item => {
-    //     if (item.code === code) {
-    //       item.selected = !item.selected;
-    //       if (item.selected) {
-    //         item.value++;
-    //       }
-    //     } else {
-    //       item.selected = false;
-    //     }
-    //     return item;
-    //   })
-    // }
-
-    this.setState({
-      items: this.state.items.map(item => {
-        if (item.code === code) {
-          return {
-            ...item,
-            selected: !item.selected
-          };
-        }
-        return item;
+  addToCart(code) {
+    const exist = this.state.products.find(item => item.code === code);
+    if (exist) {//если товар есть
+      this.setState({
+        items: [...this.state.items],
+        products: this.state.products.map(item => item.code === code ? { ...item, quantity: exist.quantity + 1 } : item)
       })
-
-    });
+    } else {//если товара еще нет
+      const product = this.state.items.find(item => item.code === code);
+      this.setState({
+        items: [...this.state.items],
+        products: [...this.state.products, { ...product, quantity: 1 }]
+      })
+    }
   }
-  
 }
 
 export default Store;

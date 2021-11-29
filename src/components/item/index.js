@@ -3,30 +3,24 @@ import propTypes from 'prop-types';
 import plural from 'plural-ru';
 import './styles.css';
 
-function Item({item, onSelect, onDelete}){
-  console.log('Item', item.title);
-
-  const [counter, setCounter] = useState(0);
-
-  const callbacks = {
-    onClick: useCallback(() => {
-      // onSelect(item.code);
-      // if (!item.selected){
-        setCounter(counter + 1);
-      // }
-    }, [item, onSelect, counter, setCounter])
+function Item({ item, addToCart }) {
+  
+  const onClick = (code) => {
+    addToCart(code);
   };
-
   return (
-    <div className={'Item'  + (item.selected ? ' Item_selected' : '')} onClick={callbacks.onClick}>
+    <div className='Item'>
       <div className='Item__number'>{item.code}</div>
       <div className='Item__title'>
         {item.title}
-        {counter ? ` | Выделялся ${counter} ${plural(counter, 'раз', 'раза', 'раз')}` : null}
+      </div>
+       <div className='Item__price'>
+        {item.price}
+        <span>&#x20bd;</span>
       </div>
       <div className='Item__actions'>
-        <button onClick={() => onDelete(item.code)}>
-          Удалить
+        <button onClick={() => onClick(item.code)}>
+          Добавить
         </button>
       </div>
     </div>
@@ -35,13 +29,11 @@ function Item({item, onSelect, onDelete}){
 
 Item.propTypes = {
   item: propTypes.object.isRequired,
-  onSelect: propTypes.func.isRequired,
-  onDeleted: propTypes.func.isRequired
+  onClick: propTypes.func.isRequired,
 }
 
 Item.defaultProps = {
-  onSelect: () => {},
-  onDeleted: () => {}
+  onClick: () => {},
 }
 
 export default React.memo(Item);

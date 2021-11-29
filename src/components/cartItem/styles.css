@@ -1,0 +1,23 @@
+.Cart__item {
+	display: flex;
+	justify-content: flex-start;
+	transition: background-color 1s;
+	padding: 22px 20px;
+	border-bottom: 1px dashed #ccc;
+}
+
+.Cart__item:first-child {
+	border-top: 1px dashed #ccc;
+}
+.Cart__name {
+	display: flex;
+	flex-grow: 1;
+}
+
+.Cart__code {
+	display: flex;
+	padding-right: 20px;
+}
+.Cart__price {
+	padding-right: 55px;
+}
