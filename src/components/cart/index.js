@@ -4,9 +4,7 @@ import CartList from '../cartList';
 import propTypes from 'prop-types';
 import './styles.css';
 
-function Cart({ goods, toggleModal }) {
-    const totalCost = goods.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    const totalQty = goods.reduce((sum, item) => sum + item.quantity, 0)
+function Cart({ goods, toggleModal, totalPrice, totalQty }) {
     return (
         <div className='Cart'>
             <div className='Cart__header'>
@@ -17,7 +15,7 @@ function Cart({ goods, toggleModal }) {
             <CartList goods={goods} /> 
              <div className='Cart__subtotal'> 
                 <div className='Cart__subtitle'>Итого</div> 
-                <div className='Cart__cost'>{totalCost} <span>&#x20bd;</span> </div>
+                <div className='Cart__cost'>{totalPrice} <span>&#x20bd;</span> </div>
                 <div className='Cart__qty'>{totalQty} шт </div>     
             </div>
         </div>
@@ -32,4 +30,4 @@ Cart.defaultProps = {
     goods: [],
     toggleModal: () => {},
 }
-export default Cart; 
+export default React.memo(Cart); 

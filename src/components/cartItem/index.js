@@ -15,6 +15,6 @@ function CartItem({ good }) {
     )
 }
 CartItem.propTypes = {
-  good: propTypes.element.isRequired,
+  good: propTypes.object.isRequired,
 };
 export default CartItem; 
