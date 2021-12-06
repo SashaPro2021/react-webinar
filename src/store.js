@@ -67,17 +67,18 @@ class Store {
   }
 
   addToCart(code) {
-    const exist = this.state.products.find(item => item.code === code);
+    const state = this.getState();
+    const exist = state.products.find(item => item.code === code);
+    const product = state.items.find(item => item.code === code);
     if (exist) {//если товар есть
       this.setState({
-        items: [...this.state.items],
-        products: this.state.products.map(item => item.code === code ? { ...item, quantity: exist.quantity + 1 } : item)
+        ...state,
+        products: state.products.map(item =>  item.code === code ? { ...item, quantity: exist.quantity + 1 } : item)
       })
     } else {//если товара еще нет
-      const product = this.state.items.find(item => item.code === code);
       this.setState({
-        items: [...this.state.items],
-        products: [...this.state.products, { ...product, quantity: 1 }]
+        ...state,
+        products:  [...state.products, { ...product, quantity: 1 }]
       })
     }
   }
