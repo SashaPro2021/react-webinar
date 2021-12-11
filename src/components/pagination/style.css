@@ -1,0 +1,16 @@
+.Pagination {
+  display: flex;
+  justify-content: flex-end;
+  list-style: none;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+.Pagination__item {
+}
+.Pagination__item_active {
+  background-color: #000000;
+  color: #ffffff;
+}
+.Number {
+  padding: 0 5px;
+}

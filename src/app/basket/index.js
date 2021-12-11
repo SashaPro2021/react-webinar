@@ -22,15 +22,16 @@ function Basket(){
 
   const renders = {
     itemBasket: useCallback(item => {
-      return <ItemBasket item={item}/>
+      return <ItemBasket item={item} onClose={callbacks.closeModal}/>
     }, [])
   }
 
+
   return (
-    <LayoutModal title={'Корзина'} onClose={callbacks.closeModal}>
-      <List items={select.items} renderItem={renders.itemBasket}/>
-      <BasketTotal amount={select.amount} sum={select.sum}/>
-    </LayoutModal>
+  <LayoutModal title={'Корзина'} onClose={callbacks.closeModal}>
+    <List items={select.items} renderItem={renders.itemBasket}/>
+    <BasketTotal amount={select.amount} sum={select.sum}/>
+  </LayoutModal>
   )
 }
 

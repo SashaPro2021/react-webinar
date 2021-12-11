@@ -3,11 +3,16 @@ import propTypes from 'prop-types';
 import './styles.css';
 import numberFormat from "../../utils/number-format";
 
-function Item({item, onAdd}) {
+import { NavLink } from "react-router-dom";
+
+function Item({ item, onAdd }) {
+  
   return (
     <div className='Item'>
-      <div className='Item__number'>{item._key}</div>
+      <div className='Item__number'>{parseInt(item._key) + 1}</div>
+      <NavLink to={item._id} className="Item__link">
       <div className='Item__title'>{item.title}</div>
+      </NavLink>
       <div className='Item__right'>
         <div className='Item__price'>{numberFormat(item.price)} ₽</div>
         <button onClick={() => onAdd(item._id)}>Добавить</button>

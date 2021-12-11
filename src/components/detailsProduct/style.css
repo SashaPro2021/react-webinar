@@ -1,0 +1,33 @@
+.DetailsProduct {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 40px 0 40px;
+}
+
+.DetailsProduct__content {
+  font-family: Arial;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  padding-bottom: 20px;
+}
+.DetailsProduct__text {
+  font-family: Arial;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21px;
+
+  color: #000000;
+  padding-left: 5px;
+}
+.DetailsProduct__text_format {
+  font-family: Arial;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 21px;
+
+  color: #000000;
+}
+.Btn {
+  margin-left: 40px;
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import Main from "./main";
 import Basket from "./basket";
 import useSelector from "../utils/use-selector";
-
+import {BrowserRouter as Router} from 'react-router-dom';
 /**
  * Приложение
  */
@@ -13,10 +13,10 @@ function App() {
   }));
 
   return (
-    <>
+    <Router>
       <Main/>
       {select.name === 'basket' && <Basket/>}
-    </>
+    </Router>
   );
 }
 

@@ -2,11 +2,13 @@ import React from 'react';
 import propTypes from 'prop-types';
 import plural from "plural-ru";
 import numberFormat from "../../utils/number-format";
+import { NavLink } from "react-router-dom";
 import './styles.css';
 
 function BasketSimple({sum, amount, onOpen}) {
   return (
     <div className='BasketSimple'>
+      <NavLink to='/' className='BasketSimple__link'>Главная</NavLink>
       <span className="BasketSimple__label">В корзине:</span>
       <span className="BasketSimple__total">
       {amount
