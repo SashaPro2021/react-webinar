@@ -27,7 +27,10 @@ Pagination.propTypes = {
 }
 
 Pagination.defaultProps = {
-  paginate: () => {}
+  paginate: () => { },
+  limit: 10,
+  count: 100,
+  currentPage: 1
 }
 
 export default React.memo(Pagination);
