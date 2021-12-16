@@ -25,8 +25,8 @@ function Main() {
 
   // Загрузка тестовых данных при первом рендере
   useEffect(async () => {
-    await store.catalog.load(select.currentPage);
-  }, [select.currentPage]);
+    await store.catalog.load();
+  }, []);
 
   const callbacks = {
     addToBasket: useCallback((_id) => store.basket.add(_id), [store]),
