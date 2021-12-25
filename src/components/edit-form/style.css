@@ -1,0 +1,55 @@
+.Form {
+  padding: 20px 35px;
+}
+.Form-Title {
+  display: flex;
+  flex-direction: column;
+}
+.Form-Input {
+  width: 250px;
+  padding: 3px 2px 2px;
+  margin-bottom: 20px;
+}
+.Form-Input_size {
+  width: 150px;
+}
+
+.Form-Description {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+.Form-Textarea {
+  width: 350px;
+}
+.Form-Country {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+.Form-Select {
+  width: 180px;
+  font-size: 16px;
+  padding: 3px 2px 2px;
+}
+.Form-Category {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+.Form-Edition {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+.Form-Price {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+.Form-Btn {
+  font-size: 16px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 110px;
+}
