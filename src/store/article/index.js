@@ -8,7 +8,10 @@ class ArticleStore extends StoreModule {
   initState() {
     return {
       data: {},
-      waiting: true
+      newData: {},
+      waiting: true,
+      error: '',
+      errorInfo: []
     };
   }
 
@@ -36,6 +39,69 @@ class ArticleStore extends StoreModule {
       this.updateState({
         data: {},
         waiting: false
+      });
+    }
+  }
+
+   handleChange = (e)  => {
+      const { name, value } = e.target;
+
+     const formData = ({...this.getState().newData, [name]: value });
+     
+     console.log('Value', formData);
+     
+     this.updateState({
+       newData: formData
+     })
+    }
+  
+  async createArticle(e) {
+    
+    e.preventDefault();
+     this.updateState({
+        error: '',
+        errorInfo: []
+    });
+
+    try {
+          const state = this.getState()
+          const obj = {
+            "isNew": true,
+            "name": state.newData.name,
+            "title": state.newData.title,
+            "description": state.newData.description,
+            "price": state.newData.price,
+            "maidIn": {
+                "_id": state.newData.maidIn
+            },
+            "edition": state.newData.edition,
+            "category": {
+                "_id":state.newData.category
+            }
+          }
+      
+    const response = await fetch(`/api/v1/articles`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(obj)
+      });
+      
+      const json = await response.json();
+
+      if (json.error) {
+        this.updateState({
+          error: json.error?.message,
+          errorInfo: json.error.data.issues,
+        })
+            
+        throw new Error(json.error);
+      } 
+
+    } catch (e){
+      this.updateState({
+        newData: {},
       });
     }
   }

@@ -34,7 +34,7 @@ function Article() {
       <Header/>
 
       <Spinner active={select.waiting}>
-        <ArticleCard article={select.article} onAdd={callbacks.addToBasket}/>
+        <ArticleCard article={select.article} onAdd={callbacks.addToBasket} />
       </Spinner>
     </Layout>
   );

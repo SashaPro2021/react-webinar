@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import Header from "../../containers/header";
 import Layout from "../../components/layout";
-import EditForm from '../../components/edit-form';
+import EditForm from '../../components/edit-form'; 
 import useSelector from "../../utils/use-selector";
 import useStore from "../../utils/use-store";
 import useInit from "../../utils/use-init";
@@ -28,6 +28,8 @@ function Edit() {
     waiting:  state.editForm.waiting,
     categories: state.categories.categories,
     countries: state.countries.countries,
+    category: state.categories.categories.categoryGood,
+    country: state.countries.countries.country,
     error: state.editForm.error,
     errorInfo: state.editForm.errorInfo
   }));

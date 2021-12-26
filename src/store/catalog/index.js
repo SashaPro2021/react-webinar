@@ -100,6 +100,35 @@ class CatalogStore extends StoreModule {
       window.history.pushState({}, '', url);
     }
   }
+
+  async deleteArticle(id, e) {
+    e.preventDefault();
+
+    this.updateState({
+      items: [],
+      waiting: true,
+    });
+  
+    try {
+      const response = await fetch(`/api/v1/articles/${id}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+        }
+      })
+      const json = await response.json();
+      if (json.error) { throw new Error(json.error); } 
+      const filteredArr = this.getState().items.filter(item => item.id !== id);
+       this.updateState({
+          items: filteredArr,
+          waiting: false,
+        })
+    } catch (e) {
+      this.updateState({
+        waiting: false,
+    });
+    }
+  }
 }
 
 export default CatalogStore;

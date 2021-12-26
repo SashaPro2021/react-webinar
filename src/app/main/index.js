@@ -20,7 +20,7 @@ function Main() {
     <Layout head={<h1>Магазин</h1>}>
       <Header/>
       <CatalogFilter/>
-      <CatalogList/>
+      <CatalogList />
     </Layout>
   );
 }

@@ -5,6 +5,7 @@ import Select from "../../components/select";
 import LayoutTools from "../../components/layout-tools";
 import Input from "../../components/input";
 import SelectCategory from '../../components/select-category';
+import {Link} from "react-router-dom";
 
 function CatalogFilter() {
 
@@ -41,6 +42,7 @@ function CatalogFilter() {
       <label>Сортировка:</label>
       <Select onChange={callbacks.onSort} value={select.sort} options={options.sort}/>
       <button onClick={callbacks.onReset}>Сбросить</button>
+      <div className='add'><Link to={'/add/'}>Добавить товар</Link></div>
     </LayoutTools>
   );
 }

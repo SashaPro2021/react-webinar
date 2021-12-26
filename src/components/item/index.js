@@ -4,7 +4,7 @@ import './styles.css';
 import numberFormat from "../../utils/number-format";
 import {Link} from "react-router-dom";
 
-function Item({item, onAdd, link}) {
+function Item({item, onAdd, onDelete, link}) {
   return (
     <div className='Item'>
       <div className='Item__number'>{item._key}</div>
@@ -12,6 +12,7 @@ function Item({item, onAdd, link}) {
       <div className='Item__right'>
         <div className='Item__price'>{numberFormat(item.price)} ₽</div>
         <button onClick={() => onAdd(item._id)}>Добавить</button>
+        <button className='Item__btn' type='submit' onClick={(e) => onDelete(item._id, e)}>Удалить</button>
       </div>
     </div>
   )

@@ -33,7 +33,7 @@ class EditFormStore extends StoreModule {
     try {
       const response = await fetch(`/api/v1/articles/${id}?fields=*,maidIn(title,code),category(title)`);
         const json = await response.json();
-   console.log(json);
+
       if (json.error) {throw new Error(json.error);} 
         
        

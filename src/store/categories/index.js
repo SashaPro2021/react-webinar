@@ -28,8 +28,7 @@ class CategoriesStore extends StoreModule {
       "parent": null,
       "title": "Все"
     }
-      console.log(json.result.items)
-      console.log('!!!')
+     
      if (json.error) throw new Error(json.error);
       this.updateState({
         categories: [elem, ...json.result.items],

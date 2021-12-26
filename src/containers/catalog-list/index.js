@@ -20,19 +20,20 @@ function CatalogList() {
 
   const callbacks = {
     addToBasket: useCallback((_id) => store.basket.add(_id), [store]),
+    onDelete: useCallback((_id, e) => store.catalog.deleteArticle(_id, e), [store]),
     onPaginate: useCallback(page => store.catalog.setParams({page}), [store]),
   }
 
   const renders = {
     item: useCallback(item => {
-      return <Item item={item} onAdd={callbacks.addToBasket} link={`/articles/${item._id}`}/>
-    }, [callbacks.addToBasket]),
+      return <Item item={item} onAdd={callbacks.addToBasket} onDelete={callbacks.onDelete} link={`/articles/${item._id}`}/>
+    }, [callbacks.addToBasket])
   }
 
   return (
     <>
       <Spinner active={select.waiting}>
-        <List items={select.items} renderItem={renders.item}/>
+        <List items={select.items} renderItem={renders.item} />
       </Spinner>
       <Pagination
         count={select.count}
