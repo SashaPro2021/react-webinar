@@ -13,7 +13,7 @@ class EditFormStore extends StoreModule {
       },
       waiting: true, 
       error: '',
-      // errorInfo: []
+      errorInfo: []
     };
   }
 
@@ -51,7 +51,7 @@ class EditFormStore extends StoreModule {
 
   handleChange = (e)  => {
       const { name, value } = e.target;
-      console.log('Value',value);
+
       const formData = ({ ...this.getState().data, [name]: value });
       
      this.updateState({
@@ -71,15 +71,15 @@ class EditFormStore extends StoreModule {
         'title': this.getState().data.title,
         'description': this.getState().data.description,
         'maidIn': {
-            '_id': this.getState().data
+            '_id': this.getState().data.country
         },
         'category': {
-           '_id': this.getState().data
+           '_id': this.getState().data.categoryGood
        },
         'edition': this.getState().data.edition,
         'price': this.getState().data.price  
       }
-      console.log(obj);
+  
         try {
         const res = await fetch(`/api/v1/articles/${id}`, {
           method: 'PUT',
@@ -93,11 +93,14 @@ class EditFormStore extends StoreModule {
           if (json.error) {
                 this.updateState({
                   error: json.error?.message,
-                  // errorInfo: json.error.data.issues
+                  errorInfo: json.error.data.issues,
                 })
             
             throw new Error(json.error);
           } 
+          this.updateState({
+            waiting: false
+          })
     
         } catch (error) {
           this.updateState({

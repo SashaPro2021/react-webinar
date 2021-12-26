@@ -4,12 +4,15 @@ import useStore from "../../utils/use-store";
 import Select from "../../components/select";
 import LayoutTools from "../../components/layout-tools";
 import Input from "../../components/input";
+import SelectCategory from '../../components/select-category';
 
 function CatalogFilter() {
 
   const store = useStore();
 
   const select = useSelector(state => ({
+    categories: state.categories.categories,
+    category: state.catalog.params.category,
     sort: state.catalog.params.sort,
     query: state.catalog.params.query,
   }));
@@ -25,6 +28,7 @@ function CatalogFilter() {
   }
 
   const callbacks = {
+    onFilter: useCallback(category => store.catalog.setParams({category}), [store]),
     onSort: useCallback(sort => store.catalog.setParams({sort}), [store]),
     onSearch: useCallback(query => store.catalog.setParams({query, page: 1}), [store]),
     onReset: useCallback(() => store.catalog.resetParams(), [store])
@@ -32,6 +36,7 @@ function CatalogFilter() {
 
   return (
     <LayoutTools>
+      <SelectCategory  onChange={callbacks.onFilter} value={select.category} options={select.categories}/>
       <Input onChange={callbacks.onSearch} value={select.query} placeholder={'Поиск'} theme="big"/>
       <label>Сортировка:</label>
       <Select onChange={callbacks.onSort} value={select.sort} options={options.sort}/>

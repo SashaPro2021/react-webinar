@@ -7,8 +7,9 @@ class CategoriesStore extends StoreModule {
    */
   initState() {
       return {
-          categories: [],
-          waiting: true
+        categories: [],
+        list: [],
+        waiting: true
     };
   }
 
@@ -25,15 +26,15 @@ class CategoriesStore extends StoreModule {
       const elem = {
       "_id": '',
       "parent": null,
-      "title": "Все"  
+      "title": "Все"
     }
-        
+      console.log(json.result.items)
+      console.log('!!!')
      if (json.error) throw new Error(json.error);
       this.updateState({
         categories: [elem, ...json.result.items],
         waiting: false
       });
-
     } catch (e){
       this.updateState({
         categories: [],
@@ -41,7 +42,6 @@ class CategoriesStore extends StoreModule {
       });
     }
   }
-
 }
 
 export default CategoriesStore;

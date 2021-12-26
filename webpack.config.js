@@ -34,6 +34,7 @@ let config = {
     extensions: ['.js', '.jsx'],
     // Где искать файлы подключаемых модулей, в том числе главный index.js
     modules: ['./', 'node_modules'],
+  
   },
   module: {
     rules: [

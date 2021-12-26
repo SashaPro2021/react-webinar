@@ -1,18 +1,23 @@
-import React, {useState} from "react";
+import React from "react";
 import ErrorNotification from '../error-notification';
-import {cn} from '@bem-react/classname'
+import { cn } from '@bem-react/classname';
+
+import { unflat, nestedList} from '../../utils/create-nested-list';
 
 import './style.css';
-import { library } from "webpack";
 
 function EditForm({data, options, error, errorInfo, countries, handleChange, handleSubmit }) {
-    console.log(data.categoryGood);
-    console.log(data);
-    console.log(error);
+  
     const className = cn('Form');
    
     const sortedData = countries.sort((a, b) => a.title.localeCompare(b.title));
-    const arrCategory = options.slice(1, 11);
+
+    const source = unflat(options);
+
+    const newList = nestedList(source, 0, '-');
+
+    const arrCategory = newList.slice(1, 11);
+
     return (
         <div className={className()}>
             <form onSubmit={handleSubmit}>
@@ -57,10 +62,10 @@ function EditForm({data, options, error, errorInfo, countries, handleChange, han
                 </div>
                 {error && <ErrorNotification>
                 <div>
-                    <p>{error}</p> 
-                    {/* <ul>
-                            {errorInfo.map(item => <li>{ item.message} </li> )}
-                    </ul> */}
+                    <p>{`${error}:`}</p>  
+                     <ul>
+                            {errorInfo.map(item => <li>{`${item.message} ---> (${item.path})`} </li> )}
+                    </ul>
                  </div>
              
               </ErrorNotification>}  

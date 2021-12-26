@@ -24,7 +24,8 @@ function Edit() {
    
   const select = useSelector(state => ({
     article: state.article.data,
-    formFields:  state.editForm.data,
+    formFields: state.editForm.data,
+    waiting:  state.editForm.waiting,
     categories: state.categories.categories,
     countries: state.countries.countries,
     error: state.editForm.error,
