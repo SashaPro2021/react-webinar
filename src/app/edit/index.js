@@ -16,6 +16,7 @@ function Edit() {
   const params = useParams();
 
   useInit(async () => {
+    await store.get('article').load(params.articleId)
     await store.get('editForm').load(params.articleId)
     await store.get('countries').load();
     await store.get('categories').load();
@@ -40,7 +41,7 @@ function Edit() {
   }
 
   return (
-    <Layout head={<h1>{select.formData.title}</h1>}>
+    <Layout head={<h1>{select.article.title}</h1>}>
       <Header />
       <Spinner active={select.waiting}>
       <EditForm

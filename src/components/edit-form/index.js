@@ -23,7 +23,7 @@ function EditForm({ data, options, error, errorInfo, countries, onChange, handle
     // Возвращаем функцию с замыканием на имя и значение
     return (value) => onChange(name,value);
     }, [onChange]);
-
+    
     return (
         <div className={className()}>
         <form onSubmit={handleSubmit}>
