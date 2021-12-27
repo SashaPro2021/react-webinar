@@ -1,16 +1,17 @@
-import React from "react";
+import React, {useCallback} from "react";
 import ErrorNotification from '../error-notification';
 import { cn } from '@bem-react/classname';
+import Textarea from '../textarea';
+import Input from '../input';
+import Select from '../select';
 
 import { unflat, nestedList} from '../../utils/create-nested-list';
 
 import './style.css';
 
-function EditForm({data, options, error, errorInfo, countries, handleChange, handleSubmit }) {
-  
+function EditForm({ data, options, error, errorInfo, countries, onChange, handleSubmit }) {
+    
     const className = cn('Form');
-   
-    const sortedData = countries.sort((a, b) => a.title.localeCompare(b.title));
 
     const source = unflat(options);
 
@@ -18,60 +19,54 @@ function EditForm({data, options, error, errorInfo, countries, handleChange, han
 
     const arrCategory = newList.slice(1, 11);
 
+    const onChangeHandler = useCallback(name => {
+    // Возвращаем функцию с замыканием на имя и значение
+    return (value) => onChange(name,value);
+    }, [onChange]);
+
     return (
         <div className={className()}>
-            <form onSubmit={handleSubmit}>
-                <div className={className('Title')}>
-                    <label htmlFor='title' className={className('Label')}>Название </label>
-                    <input id='title' className={className('Input')} type="text" name='title' value={data.title} onChange={handleChange}/>
-                </div>  
-
-                <div className={className('Description')}>
-                    <label htmlFor='descr' className={className('Label')}> Описание </label>
-                    <textarea id='descr' rows={7} className={className('Textarea')} name='description' value={data.description} onChange={handleChange}>{data.description}</textarea>
-                </div>
-                <div className={className('Country')}>
-                    <label htmlFor='select' className={className('Label')}> Страна производитель </label>
-                     <select id='select' className={className('Select')} name='country' value={data.country} onChange={handleChange}>
-                        {sortedData.map(country => 
-                            <option key={country._id} value={country._id}>{country.title + ' ' + `(${country.code})`}</option>
-                        )} 
-                    </select>
-                </div>
-
-                <div className={className('Category')}>
-                <label htmlFor='select' className={className('Label')}> Категория  </label>
-                 <select id='select' className={className('Select')}  name='categoryGood' value={data.categoryGood} onChange={handleChange}>
-                        {arrCategory.map(category =>
-                            <option key={category._id} value={category._id}>{category.title}</option>
-                        )}
-                </select>
-                </div>
-
-                <div className={className('Edition')}>
-                    <label htmlFor='edition' className={className('Label')}>Год выпуска </label>
-                    <input id='edition' className={className('Input_size')} type="text" name='edition' value={data.edition} onChange={handleChange}/>
-                </div>
-
-                <div className={className('Price')}>
-                    <label htmlFor='price' className={className('Label')}>Цена (&#8381;)  </label>
-                     <input id='price' className={className('Input_size')} type="text" name='price' value={data.price} onChange={handleChange}/>
-                </div>
-                <div className={className('Save')}>
-                    <button className={className('Btn')} type="submit">Сохранить</button>
-                </div>
-                {error && <ErrorNotification>
-                <div>
-                    <p>{`${error}:`}</p>  
-                     <ul>
-                            {errorInfo.map(item => <li>{`${item.message} ---> (${item.path})`} </li> )}
-                    </ul>
-                 </div>
-             
-              </ErrorNotification>}  
-            </form>
-      </div>
-    )
+        <form onSubmit={handleSubmit}>
+            <div className={className('Wrapper')}>
+                <label className={className('Label')}>Название 
+                <Input type="text" value={data.title} theme='big' onChange={onChangeHandler('title')}/>
+                </label>
+            </div>  
+            <div className={className('Wrapper')}>
+                <label  className={className('Label')}> Описание 
+                <Textarea rows={10} value={data.description}  onChange={onChangeHandler('description')}/>
+                </label>
+            </div>
+            <div className={className('Wrapper')}>
+                <label  className={className('Label')}> Страна производитель 
+                    <Select className={className('Select')} theme='big' value={data.country} onChange={onChangeHandler('country')} options={countries}/>
+                </label>
+            </div>
+            <div className={className('Wrapper')}>
+            <label className={className('Label')}> Категория  
+                <Select  className={className('Select')} theme='big' value={data.categoryGood} onChange={onChangeHandler('categoryGood')} options={arrCategory}/>
+                </label>
+            </div>
+            <div className={className('Wrapper')}>
+                <label  className={className('Label')}>Год выпуска 
+                <Input  className={className('Input_size')} theme='big' type="number" value={data.edition} onChange={onChangeHandler('edition')}/>
+                </label>
+            </div>
+            <div className={className('Wrapper')}>
+                <label className={className('Label')}>Цена (&#8381;)  
+                    <Input  className={className('Input_size')} theme='big' type="number" value={data.price} onChange={onChangeHandler('price')}/>
+                </label>
+            </div>
+            <div className={className('Wrapper')}>
+                <button className={className('Btn')} type="submit">Сохранить</button>
+            </div>
+            {error && <ErrorNotification>
+                <div>{`${error}:`}</div>  
+                <div><ul> {errorInfo.map(item => <li >{`${item.message} ---> (${item.path})`} </li> )} </ul></div>
+            </ErrorNotification>}  
+        </form>
+    </div>
+)
 }
 
 

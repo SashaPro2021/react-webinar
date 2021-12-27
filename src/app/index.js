@@ -5,7 +5,7 @@ import Basket from "./basket";
 import useSelector from "../utils/use-selector";
 import Article from "./article";
 import Edit from './edit';
-import NewArticle from './newArticle';
+import NewArticle from './new-article';
 
 /**
  * Приложение

@@ -8,7 +8,20 @@ class ArticleStore extends StoreModule {
   initState() {
     return {
       data: {},
-      newData: {},
+      newData: {
+      "isNew": true,
+        "name": '',
+        "title": '',
+        "description": '',
+        "price": 0,
+        "maidIn": {
+            "_id": ''
+        },
+        "edition": 0,
+        "category": {
+            "_id":''
+        }
+      },
       waiting: true,
       error: '',
       errorInfo: []
@@ -19,7 +32,6 @@ class ArticleStore extends StoreModule {
    * Загрузка списка товаров
    */
   async load(id){
-
     this.updateState({
       waiting: true,
       data: {}
@@ -43,20 +55,13 @@ class ArticleStore extends StoreModule {
     }
   }
 
-   handleChange = (e)  => {
-      const { name, value } = e.target;
-
-     const formData = ({...this.getState().newData, [name]: value });
-     
-     console.log('Value', formData);
-     
+   handleChange = (name, value)  => {
      this.updateState({
-       newData: formData
+       newData: ({ ...this.getState().newData, [name]: value })
      })
-    }
+  }
   
   async createArticle(e) {
-    
     e.preventDefault();
      this.updateState({
         error: '',
@@ -64,21 +69,21 @@ class ArticleStore extends StoreModule {
     });
 
     try {
-          const state = this.getState()
-          const obj = {
-            "isNew": true,
-            "name": state.newData.name,
-            "title": state.newData.title,
-            "description": state.newData.description,
-            "price": state.newData.price,
-            "maidIn": {
-                "_id": state.newData.maidIn
-            },
-            "edition": state.newData.edition,
-            "category": {
-                "_id":state.newData.category
-            }
-          }
+      const state = this.getState()
+      const obj = {
+        "isNew": state.newData.isNew,
+        "name": state.newData.name,
+        "title": state.newData.title,
+        "description": state.newData.description,
+        "price": state.newData.price,
+        "maidIn": {
+            "_id": state.newData.maidIn
+        },
+        "edition": state.newData.edition,
+        "category": {
+            "_id":state.newData.category
+        }
+      }
       
     const response = await fetch(`/api/v1/articles`, {
           method: 'POST',

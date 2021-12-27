@@ -26,8 +26,8 @@ function NewArticle() {
   }));
 
   const callbacks = {
-     handleChange: useCallback((e) => store.get('article').handleChange(e), [store]),
-     handleSubmit: useCallback((e) => store.get('article').createArticle(e), [store])
+    onChange: useCallback((name, value) => store.get('article').handleChange(name, value), [store]),
+    handleSubmit: useCallback((e) => store.get('article').createArticle(e), [store])
   }
 
   return (
@@ -38,7 +38,7 @@ function NewArticle() {
         data={select.newArticle}
         countries={select.countries}
         options={select.categories}
-        handleChange={callbacks.handleChange}
+        onChange={callbacks.onChange}
         handleSubmit={callbacks.handleSubmit}
         error={select.error}
         errorInfo={select.errorInfo}

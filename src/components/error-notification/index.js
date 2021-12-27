@@ -5,7 +5,7 @@ import './style.css';
 
 function ErrorNotification(props) {
     return (
-        <p className='Error'>{props.children}</p>
+        <div className='Error'>{props.children}</div>
     )
 };
 

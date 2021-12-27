@@ -12,7 +12,7 @@ function ArticleCard({article, onAdd}) {
 
   return (
     <div className={className()}>
-      <div className={className('EditLink')}><Link to={`/edit/${article._id}`}>Редактировать</Link></div>
+    <div className={className('EditLink')}><Link to={`/edit/${article._id}`}>Редактировать</Link></div>
       <div className={className('Description')}>{article.description}</div>
       <div className={className('Prop')}>
         <div className={className('Label')}>Страна производитель:</div>

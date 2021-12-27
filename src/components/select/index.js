@@ -3,6 +3,7 @@ import propTypes from "prop-types";
 import {cn} from '@bem-react/classname'
 import './styles.css';
 
+
 function Select(props){
 
   // CSS классы по БЭМ
@@ -13,9 +14,9 @@ function Select(props){
   }, [props.onChange])
 
   return (
-    <select className={className()} onChange={onSelect} value={props.value}>
+    <select className={className({theme: props.theme})} onChange={onSelect} value={props.value}>
       {props.options.map(item => (
-        <option key={item.value} value={item.value}>{item.title}</option>
+        <option key={item._id} value={item._id}>{item.title}</option>
       ))}
     </select>
   )

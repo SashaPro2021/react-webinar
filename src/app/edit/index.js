@@ -24,7 +24,7 @@ function Edit() {
    
   const select = useSelector(state => ({
     article: state.article.data,
-    formFields: state.editForm.data,
+    formData: state.editForm.data,
     waiting:  state.editForm.waiting,
     categories: state.categories.categories,
     countries: state.countries.countries,
@@ -33,23 +33,23 @@ function Edit() {
     error: state.editForm.error,
     errorInfo: state.editForm.errorInfo
   }));
-
+  
   const callbacks = {
-    handleChange: useCallback((e) => store.get('editForm').handleChange(e), [store]),
+    onChange: useCallback((name, value) => store.get('editForm').handleChange(name, value), [store]),
     handleSubmit: useCallback((e) => store.get('editForm').updateArticles(params.articleId, e), [store])
   }
-  
+
   return (
-    <Layout head={<h1>{select.article.title}</h1>}>
+    <Layout head={<h1>{select.formData.title}</h1>}>
       <Header />
       <Spinner active={select.waiting}>
       <EditForm
-        data = {select.formFields}
+        data = {select.formData}
         error={select.error}
         errorInfo={select.errorInfo}
         countries={select.countries}
         options={select.categories}
-        handleChange={callbacks.handleChange}
+        onChange={callbacks.onChange}
         handleSubmit={callbacks.handleSubmit} />
       </Spinner>
     </Layout>

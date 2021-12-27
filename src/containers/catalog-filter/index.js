@@ -4,8 +4,8 @@ import useStore from "../../utils/use-store";
 import Select from "../../components/select";
 import LayoutTools from "../../components/layout-tools";
 import Input from "../../components/input";
-import SelectCategory from '../../components/select-category';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { unflat, nestedList} from '../../utils/create-nested-list';
 
 function CatalogFilter() {
 
@@ -21,10 +21,10 @@ function CatalogFilter() {
   // Опции для полей
   const options = {
     sort: useMemo(() => ([
-      {value:'key', title: 'По коду'},
-      {value:'title.ru', title: 'По именованию'},
-      {value:'-price', title: 'Сначала дорогие'},
-      {value:'edition', title: 'Древние'},
+      {_id:'key', title: 'По коду'},
+      {_id:'title.ru', title: 'По именованию'},
+      {_id:'-price', title: 'Сначала дорогие'},
+      {_id:'edition', title: 'Древние'},
     ]), [])
   }
 
@@ -34,10 +34,13 @@ function CatalogFilter() {
     onSearch: useCallback(query => store.catalog.setParams({query, page: 1}), [store]),
     onReset: useCallback(() => store.catalog.resetParams(), [store])
   }
+  
+  const source = unflat(select.categories);
+  const newList = nestedList(source, 0, '-')
 
   return (
     <LayoutTools>
-      <SelectCategory  onChange={callbacks.onFilter} value={select.category} options={select.categories}/>
+      <Select onChange={callbacks.onFilter} value={select.category} options={newList}/>
       <Input onChange={callbacks.onSearch} value={select.query} placeholder={'Поиск'} theme="big"/>
       <label>Сортировка:</label>
       <Select onChange={callbacks.onSort} value={select.sort} options={options.sort}/>

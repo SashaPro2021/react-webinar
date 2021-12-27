@@ -4,7 +4,7 @@ import {cn} from '@bem-react/classname'
 import './styles.css';
 import throttle from "lodash.throttle";
 
-function Input(props) {
+function Textarea(props) {
 
   // Внутренний стейт по умолчанию с переданным value
   const [value, change] = useState(props.value);
@@ -24,11 +24,12 @@ function Input(props) {
   }, [props.value]);
 
   // CSS классы по БЭМ
-  const className = cn('Input');
+  const className = cn('Textarea');
 
   return (
-    <input
-      className={className({theme: props.theme})}
+    <textarea
+      className={className()}
+      rows={props.rows}
       value={value}
       type={props.type}
       placeholder={props.placeholder}
@@ -37,24 +38,18 @@ function Input(props) {
   )
 }
 
-Input.propTypes = {
-  value: propTypes.oneOfType([
-  propTypes.string,
-  propTypes.number
-  ]),
-  type:propTypes.oneOfType([
-  propTypes.string,
-  propTypes.number
-  ]),
+Textarea.propTypes = {
+  value: propTypes.string,
+  type: propTypes.string,
   placeholder: propTypes.string,
   onChange: propTypes.func,
   theme: propTypes.string,
 }
 
-Input.defaultProps = {
+Textarea.defaultProps = {
   onChange: () => {},
   type: 'text',
   theme: ''
 }
 
-export default React.memo(Input);
+export default React.memo(Textarea);
