@@ -7,7 +7,8 @@ class EditFormStore extends StoreModule {
    */
   initState() {
     return {
-      data: {
+      data: {},
+      formData: {
         title: '',
         description: '',
         edition: 0,
@@ -27,15 +28,8 @@ class EditFormStore extends StoreModule {
   async load(id){
 
     this.updateState({
+      data: {},
       waiting: true,
-       data: {
-        title: '',
-        description: '',
-        edition: 0,
-        price: 0,
-        country: '',
-        categoryGood: ''
-      }
     });
    
     try {
@@ -46,7 +40,8 @@ class EditFormStore extends StoreModule {
         
        
       this.updateState({
-        data: { ...json.result, country: json.result.maidIn?._id, categoryGood: json.result.category?._id},
+        data: json.result,
+        formData: { ...json.result, country: json.result.maidIn?._id, categoryGood: json.result.category?._id},
         waiting: false
       });
     
@@ -59,11 +54,11 @@ class EditFormStore extends StoreModule {
 
   handleChange = (name, value)  => {
      this.updateState({
-       data: ({ ...this.getState().data, [name]: value })
+       formData: ({ ...this.getState().formData, [name]: value })
      })
   }
 
-    async updateArticles(id, e) {
+  async updateArticles(id, e) {
 
      e.preventDefault();
     
@@ -72,16 +67,16 @@ class EditFormStore extends StoreModule {
         waiting: true,
     });
     const obj = {
-      'title': this.getState().data.title,
-      'description': this.getState().data.description,
+      'title': this.getState().formData.title,
+      'description': this.getState().formData.description,
       'maidIn': {
-          '_id': this.getState().data.country
+          '_id': this.getState().formData.country
       },
       'category': {
-          '_id': this.getState().data.categoryGood
+          '_id': this.getState().formData.categoryGood
       },
-      'edition': this.getState().data.edition,
-      'price': this.getState().data.price  
+      'edition': this.getState().formData.edition,
+      'price': this.getState().formData.price  
     }
   
     try {
@@ -103,7 +98,7 @@ class EditFormStore extends StoreModule {
         throw new Error(json.error);
       } 
       this.updateState({
-        ...this.getState().data,
+        data: {...this.getState().data, ...this.getState().formData},
         waiting: false
       })
 

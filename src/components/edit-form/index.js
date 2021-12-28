@@ -1,9 +1,10 @@
-import React, {useCallback} from "react";
+import React, {useState, useCallback} from "react";
 import ErrorNotification from '../error-notification';
 import { cn } from '@bem-react/classname';
 import Textarea from '../textarea';
 import Input from '../input';
 import Select from '../select';
+// import { v4 as uuidv4 } from 'uuid';
 
 import { unflat, nestedList} from '../../utils/create-nested-list';
 
@@ -23,7 +24,9 @@ function EditForm({ data, options, error, errorInfo, countries, onChange, handle
     // Возвращаем функцию с замыканием на имя и значение
     return (value) => onChange(name,value);
     }, [onChange]);
-    
+
+    // const id = uuidv4();
+
     return (
         <div className={className()}>
         <form onSubmit={handleSubmit}>
@@ -62,13 +65,10 @@ function EditForm({ data, options, error, errorInfo, countries, onChange, handle
             </div>
             {error && <ErrorNotification>
                 <div>{`${error}:`}</div>  
-                <div><ul> {errorInfo.map(item => <li >{`${item.message} ---> (${item.path})`} </li> )} </ul></div>
+                <div><ul > {errorInfo.map((item, i) => <li key={i}>{`${item.message} ---> (${item.path})`} </li> )} </ul></div>
             </ErrorNotification>}  
         </form>
     </div>
 )
 }
-
-
-
 export default React.memo(EditForm);

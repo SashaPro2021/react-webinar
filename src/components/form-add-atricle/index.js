@@ -67,7 +67,7 @@ function FormAddArticle({ data, error, errorInfo, options, countries, onChange, 
             </div>
             {error && <ErrorNotification>
                 <div>{`${error}:`}</div>  
-                <div><ul> {errorInfo.map(item => <li >{`${item.message} ---> (${item.path})`} </li> )} </ul></div>
+                <div><ul> {errorInfo.map((item, i)=> <li key={i}>{`${item.message} ---> (${item.path})`} </li> )} </ul></div>
             </ErrorNotification>}  
         </form>
     </div>

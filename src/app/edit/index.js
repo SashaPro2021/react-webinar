@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, {useState, useCallback } from "react";
 import Header from "../../containers/header";
 import Layout from "../../components/layout";
 import EditForm from '../../components/edit-form'; 
@@ -24,8 +24,8 @@ function Edit() {
  
    
   const select = useSelector(state => ({
-    article: state.article.data,
-    formData: state.editForm.data,
+    article: state.editForm.data,
+    formData: state.editForm.formData,
     waiting:  state.editForm.waiting,
     categories: state.categories.categories,
     countries: state.countries.countries,
@@ -37,7 +37,7 @@ function Edit() {
   
   const callbacks = {
     onChange: useCallback((name, value) => store.get('editForm').handleChange(name, value), [store]),
-    handleSubmit: useCallback((e) => store.get('editForm').updateArticles(params.articleId, e), [store])
+    handleSubmit: useCallback((e) => store.get('editForm').updateArticles(params.articleId, e), [store]),
   }
 
   return (
